@@ -68,7 +68,7 @@ const Blogs = () => {
       setBlogDescription('');
       setBlogCategory('');
       setBlogAuthor('');
-      setBlogImage(null);
+      setBlogImage(null);  // Reset image after form submission
       setEditingBlog(null);
     } catch (error) {
       toast.error('Error adding/updating blog');
@@ -97,6 +97,7 @@ const Blogs = () => {
     setBlogDescription(blog.description);
     setBlogCategory(blog.category);
     setBlogAuthor(blog.author);
+    setBlogImage(null); // Clear the image field when editing
   };
 
   return (
@@ -177,6 +178,16 @@ const Blogs = () => {
           onChange={(e) => setBlogImage(e.target.files[0])}
           style={{ marginTop: 10 }}
         />
+        
+        {/* Show image preview if editing */}
+        {editingBlog && editingBlog.image && (
+          <div>
+            <img src={editingBlog.image} alt="Blog" width={100} style={{ marginTop: 10 }} />
+            <Typography variant="body2" color="textSecondary" sx={{ marginTop: 1 }}>
+              Current Image
+            </Typography>
+          </div>
+        )}
 
         <Button
           variant="contained"
